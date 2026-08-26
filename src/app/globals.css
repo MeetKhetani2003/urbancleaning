@@ -94,6 +94,9 @@ em { color: var(--green); font-family: Georgia, "Times New Roman", serif; font-w
 
 /* Hero */
 .hero { position: relative; min-height: min(720px, calc(100vh - 76px)); overflow: hidden; background: var(--green-dark); color: white; }
+/* Next.js 16 fill images no longer use a span wrapper; parent containers must be position:relative */
+.page-hero, .service-hero, .booking-visual { position: relative; overflow: hidden; }
+.space-image, .education-image, .about-intro-image, .package-explainer-image { position: relative; overflow: hidden; }
 .hero-image, .page-hero > span, .service-hero > span, .booking-visual > span, .commercial-image > span, .space-image > span, .education-image > span, .about-intro-image > span, .package-explainer-image > span { position: absolute !important; inset: 0; }
 .hero-image img, .page-hero img, .service-hero img, .booking-visual img, .commercial-image img, .space-image img, .education-image img, .about-intro-image img, .package-explainer-image img { object-fit: cover; }
 .hero-image { animation: heroReveal 1.15s cubic-bezier(.2,.65,.3,1) both; }
