@@ -2,19 +2,24 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const targetDir = 'c:\\Users\\meetk\\OneDrive\\Desktop\\Projects\\15-08-2026 to 15-08-2026\\MKDigital\\2000 projects\\premium-education-board-ui (1)\\public\\images';
+const targetDir = path.join(__dirname, 'public', 'images');
 
 const images = [
+    { path: 'services/full-home-cleaning.jpg', query: 'house,cleaning,interior' },
     { path: 'services/bathroom-cleaning.jpg', query: 'bathroom,cleaning' },
     { path: 'services/kitchen-cleaning.jpg', query: 'kitchen,cleaning' },
-    { path: 'services/full-home-cleaning.jpg', query: 'home,cleaning' },
     { path: 'services/sofa-cleaning.jpg', query: 'sofa,cleaning' },
-    { path: 'services/mattress-cleaning.jpg', query: 'mattress,cleaning' },
+    { path: 'services/mattress-cleaning.jpg', query: 'mattress,bedroom' },
     { path: 'services/office-cleaning.jpg', query: 'office,cleaning' },
-    { path: 'services/meeting-room-cleaning.jpg', query: 'meeting,room,cleaning' },
-    { path: 'services/outdoor-cleaning.jpg', query: 'outdoor,cleaning' },
-    { path: 'hero/cleaning-team.jpg', query: 'cleaning,team' },
-    { path: 'hero/clean-home.jpg', query: 'clean,home' },
+    { path: 'services/meeting-room-cleaning.jpg', query: 'meeting,room' },
+    { path: 'services/outdoor-cleaning.jpg', query: 'balcony,cleaning' },
+    { path: 'services/gas-stove-cleaning.jpg', query: 'stove,cleaning' },
+    { path: 'services/exhaust-fan-cleaning.jpg', query: 'kitchen,exhaust,fan' },
+    { path: 'services/ceiling-fan-cleaning.jpg', query: 'ceiling,fan' },
+    { path: 'services/window-cleaning.jpg', query: 'window,cleaning' },
+    { path: 'services/garden-cleaning.jpg', query: 'garden,cleaning' },
+    { path: 'hero/cleaning-team.jpg', query: 'cleaning,team,professional' },
+    { path: 'hero/clean-home.jpg', query: 'clean,living,room' },
     { path: 'logo/urban-shine-logo.png', query: 'logo,cleaning,shining' },
     { path: 'packages/2bhk-cleaning.jpg', query: 'apartment,living,room' },
     { path: 'packages/3bhk-cleaning.jpg', query: 'apartment,living,room,spacious' },
