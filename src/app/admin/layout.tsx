@@ -1,11 +1,13 @@
 "use client";
 
-import { ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const isLoginPage = pathname === '/admin/login';
 
   if (isLoginPage) {
@@ -13,32 +15,52 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+      {/* Mobile Header */}
+      <div className="md:hidden bg-white shadow-sm flex items-center justify-between p-4 sticky top-0 z-20">
+        <h2 className="text-xl font-bold text-[#0c5f50]">Admin Panel</h2>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-600 focus:outline-none">
+          {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Sidebar Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden" 
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md flex-shrink-0">
-        <div className="p-6">
+      <aside 
+        className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-white shadow-md flex-shrink-0 z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }`}
+      >
+        <div className="p-6 hidden md:block">
           <h2 className="text-2xl font-bold text-[#0c5f50]">Admin Panel</h2>
         </div>
-        <nav className="mt-6">
-          <Link href="/admin" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+        <nav className="mt-2 md:mt-6">
+          <Link href="/admin" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Dashboard
           </Link>
-          <Link href="/admin/services" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+          <Link href="/admin/services" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Services
           </Link>
-          <Link href="/admin/packages" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+          <Link href="/admin/packages" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Packages
           </Link>
-          <Link href="/admin/about" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+          <Link href="/admin/about" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             About Page
           </Link>
-          <Link href="/admin/gallery" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+          <Link href="/admin/gallery" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Gallery
           </Link>
-          <Link href="/admin/contact" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+          <Link href="/admin/contact" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Contact Info
           </Link>
-          <Link href="/admin/inquiries" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+          <Link href="/admin/inquiries" onClick={() => setSidebarOpen(false)} className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Inquiries
           </Link>
           <button 
@@ -54,7 +76,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-8 w-full overflow-x-hidden">
         {children}
       </main>
     </div>

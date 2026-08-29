@@ -56,7 +56,7 @@ export default function AdminContactPage() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700">Business Name</label>
             <input type="text" required value={formData.businessName} onChange={e => setFormData({...formData, businessName: e.target.value})} className="mt-1 w-full border border-gray-300 p-2 rounded" />

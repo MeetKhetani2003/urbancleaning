@@ -89,7 +89,7 @@ export default function GalleryFormPage({ params }: { params: Promise<{ id: stri
 
         {type === 'item' ? (
           <>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Category</label>
                 <input type="text" required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="mt-1 w-full border border-gray-300 p-2 rounded" />
@@ -112,7 +112,7 @@ export default function GalleryFormPage({ params }: { params: Promise<{ id: stri
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">Before Image</label>
               <input type="file" onChange={e => setFileBefore(e.target.files?.[0] || null)} className="mt-1 w-full" />

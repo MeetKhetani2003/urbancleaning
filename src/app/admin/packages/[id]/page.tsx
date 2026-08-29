@@ -75,7 +75,7 @@ export default function PackageFormPage({ params }: { params: Promise<{ id: stri
     <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-gray-100">
       <h1 className="text-2xl font-bold mb-6">{isNew ? 'Add New Package' : 'Edit Package'}</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700">Title</label>
             <input type="text" required value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="mt-1 w-full border border-gray-300 p-2 rounded" />
