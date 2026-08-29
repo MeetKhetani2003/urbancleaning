@@ -5,6 +5,7 @@ export interface IPackage extends Document {
   title: string;
   description: string;
   rooms: string;
+  image: string;
   included: string[];
   price?: string;
 }
