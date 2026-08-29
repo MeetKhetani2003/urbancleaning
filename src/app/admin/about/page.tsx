@@ -2,11 +2,22 @@
 
 import { useState, useEffect } from 'react';
 
+const getImageUrl = (image: string | null | undefined, fallback: string = "") => {
+  if (!image) return fallback;
+  if (image.startsWith('/') || image.startsWith('http')) return image;
+  return `/api/images/${image}`;
+};
+
 export default function AboutAdminPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+
+  const [heroFile, setHeroFile] = useState<File | null>(null);
+  const [introFile, setIntroFile] = useState<File | null>(null);
+  const [ownerFile, setOwnerFile] = useState<File | null>(null);
+  const [staffFiles, setStaffFiles] = useState<{ [index: number]: File }>({});
 
   useEffect(() => {
     fetchAboutData();
@@ -26,22 +37,54 @@ export default function AboutAdminPage() {
     }
   };
 
+  const uploadFile = async (file: File) => {
+    const uploadData = new FormData();
+    uploadData.append('file', file);
+    const res = await fetch('/api/admin/upload', { method: 'POST', body: uploadData });
+    const result = await res.json();
+    if (result.success) return result.fileId;
+    throw new Error('Upload failed');
+  };
+
   const handleSave = async () => {
     setSaving(true);
     setMessage('');
     try {
+      const payload = { ...data };
+
+      if (heroFile) {
+        payload.hero.image = await uploadFile(heroFile);
+      }
+      if (introFile) {
+        payload.intro.image = await uploadFile(introFile);
+      }
+      if (ownerFile) {
+        payload.owner.image = await uploadFile(ownerFile);
+      }
+      for (const [index, file] of Object.entries(staffFiles)) {
+        payload.staff[Number(index)].image = await uploadFile(file);
+      }
+
       const res = await fetch('/api/admin/about', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
+
       if (res.ok) {
         setMessage('Successfully saved changes.');
+        setHeroFile(null);
+        setIntroFile(null);
+        setOwnerFile(null);
+        setStaffFiles({});
+        // Optionally re-fetch to see the updated IDs
+        fetchAboutData();
       } else {
         setMessage('Failed to save changes.');
       }
     } catch (error) {
-      setMessage('Error occurred while saving.');
+      setMessage('Error occurred while saving. Make sure images are valid.');
+      console.error(error);
     } finally {
       setSaving(false);
     }
@@ -92,13 +135,19 @@ export default function AboutAdminPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Background Image URL</label>
+            <label className="block text-sm font-medium text-gray-700">Background Image</label>
             <input
-              type="text"
+              type="file"
               className="mt-1 block w-full border border-gray-300 rounded p-2"
-              value={data.hero?.image}
-              onChange={(e) => setData({ ...data, hero: { ...data.hero, image: e.target.value } })}
+              onChange={(e) => setHeroFile(e.target.files?.[0] || null)}
             />
+            {data.hero?.image && !heroFile && (
+               <div className="mt-2">
+                 <p className="text-xs text-gray-500 mb-1">Current Image:</p>
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                 <img src={getImageUrl(data.hero.image)} alt="Preview" className="h-32 object-cover rounded shadow-sm border border-gray-200" />
+               </div>
+            )}
           </div>
         </div>
       </section>
@@ -135,13 +184,19 @@ export default function AboutAdminPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Side Image URL</label>
+            <label className="block text-sm font-medium text-gray-700">Side Image</label>
             <input
-              type="text"
+              type="file"
               className="mt-1 block w-full border border-gray-300 rounded p-2"
-              value={data.intro?.image}
-              onChange={(e) => setData({ ...data, intro: { ...data.intro, image: e.target.value } })}
+              onChange={(e) => setIntroFile(e.target.files?.[0] || null)}
             />
+            {data.intro?.image && !introFile && (
+               <div className="mt-2">
+                 <p className="text-xs text-gray-500 mb-1">Current Image:</p>
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                 <img src={getImageUrl(data.intro.image)} alt="Preview" className="h-32 object-cover rounded shadow-sm border border-gray-200" />
+               </div>
+            )}
           </div>
         </div>
       </section>
@@ -304,13 +359,19 @@ export default function AboutAdminPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Image URL</label>
+            <label className="block text-sm font-medium text-gray-700">Image</label>
             <input
-              type="text"
+              type="file"
               className="mt-1 block w-full border border-gray-300 rounded p-2"
-              value={data.owner?.image}
-              onChange={(e) => setData({ ...data, owner: { ...data.owner, image: e.target.value } })}
+              onChange={(e) => setOwnerFile(e.target.files?.[0] || null)}
             />
+            {data.owner?.image && !ownerFile && (
+               <div className="mt-2">
+                 <p className="text-xs text-gray-500 mb-1">Current Image:</p>
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                 <img src={getImageUrl(data.owner.image)} alt="Preview" className="h-32 object-cover rounded shadow-sm border border-gray-200" />
+               </div>
+            )}
           </div>
         </div>
       </section>
@@ -327,6 +388,9 @@ export default function AboutAdminPage() {
                   const newStaff = [...data.staff];
                   newStaff.splice(index, 1);
                   setData({ ...data, staff: newStaff });
+                  const newStaffFiles = { ...staffFiles };
+                  delete newStaffFiles[index];
+                  setStaffFiles(newStaffFiles);
                 }}
               >
                 Remove
@@ -359,17 +423,23 @@ export default function AboutAdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-500">Image URL</label>
+                  <label className="block text-xs text-gray-500">Image</label>
                   <input
-                    type="text"
+                    type="file"
                     className="mt-1 block w-full border border-gray-300 rounded p-1 text-sm"
-                    value={member.image}
                     onChange={(e) => {
-                      const newStaff = [...data.staff];
-                      newStaff[index].image = e.target.value;
-                      setData({ ...data, staff: newStaff });
+                      if (e.target.files?.[0]) {
+                        setStaffFiles({ ...staffFiles, [index]: e.target.files[0] });
+                      }
                     }}
                   />
+                  {member.image && !staffFiles[index] && (
+                     <div className="mt-2">
+                       <p className="text-[10px] text-gray-500 mb-1">Current Image:</p>
+                       {/* eslint-disable-next-line @next/next/no-img-element */}
+                       <img src={getImageUrl(member.image)} alt="Preview" className="h-16 w-16 object-cover rounded shadow-sm border border-gray-200" />
+                     </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -13,6 +13,12 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic';
 
+const getImageUrl = (image: string | null | undefined, fallback: string) => {
+  if (!image) return fallback;
+  if (image.startsWith('/') || image.startsWith('http')) return image;
+  return `/api/images/${image}`;
+};
+
 export default async function AboutPage() {
   await connectDB();
   let aboutData = await About.findOne({});
@@ -51,7 +57,7 @@ export default async function AboutPage() {
 
   return <>
     <section className="page-hero page-hero--about">
-      <Image src={aboutData.hero.image || "/images/about/professional-cleaning-team.jpg"} alt="Professional Urban Shine Cleaning team" fill priority sizes="100vw" />
+      <Image src={getImageUrl(aboutData.hero.image, "/images/about/professional-cleaning-team.jpg")} alt="Professional Urban Shine Cleaning team" fill priority sizes="100vw" />
       <div className="page-hero-wash" />
       <div className="shell page-hero-content">
         <p className="eyebrow eyebrow--light">About Urban Shine</p>
@@ -65,7 +71,7 @@ export default async function AboutPage() {
       <section className="section shell bg-[var(--wash)] rounded-[var(--radius)] px-8 py-16 mt-12 mb-20 flex flex-col md:flex-row gap-12 items-center">
         {aboutData.owner.image && (
           <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg shrink-0">
-            <Image src={aboutData.owner.image} alt={aboutData.owner.name} fill className="object-cover" />
+            <Image src={getImageUrl(aboutData.owner.image, "")} alt={aboutData.owner.name} fill className="object-cover" />
           </div>
         )}
         <div>
@@ -79,7 +85,7 @@ export default async function AboutPage() {
 
     <section className="section shell about-intro">
       <div className="about-intro-image image-frame">
-        <Image src={aboutData.intro.image || "/images/about/cleaning-equipment.jpg"} alt="Professional cleaning equipment ready for service" fill sizes="(max-width: 800px) 92vw, 46vw" />
+        <Image src={getImageUrl(aboutData.intro.image, "/images/about/cleaning-equipment.jpg")} alt="Professional cleaning equipment ready for service" fill sizes="(max-width: 800px) 92vw, 46vw" />
       </div>
       <div>
         <p className="eyebrow">{aboutData.intro.eyebrow}</p>
@@ -123,7 +129,7 @@ export default async function AboutPage() {
             <div key={idx} className="flex flex-col items-center text-center">
               <div className="relative w-40 h-40 rounded-full overflow-hidden mb-4 shadow-md bg-[var(--wash)]">
                 {member.image ? (
-                  <Image src={member.image} alt={member.name} fill className="object-cover" />
+                  <Image src={getImageUrl(member.image, "")} alt={member.name} fill className="object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-[var(--muted)] bg-gray-100">
                     No Image
