@@ -18,10 +18,10 @@ const gallery: GalleryItem[] = [
 ];
 
 export const comparisons = [
-  { title: "Bathroom", before: "/images/gallery/cleaning-before-after-01.jpg", after: "/images/gallery/bathroom-01.jpg", alt: "Bathroom cleaning comparison" },
-  { title: "Kitchen", before: "/images/gallery/cleaning-before-after-02.jpg", after: "/images/gallery/kitchen-01.jpg", alt: "Kitchen cleaning comparison" },
-  { title: "Sofa", before: "/images/gallery/sofa-01.jpg", after: "/images/services/sofa-cleaning.jpg", alt: "Sofa cleaning comparison" },
-  { title: "Window", before: "/images/gallery/window-01.jpg", after: "/images/services/window-cleaning.jpg", alt: "Window cleaning comparison" },
+  { title: "Bathroom", before: "/images/gallery/bathroom-before.jpg", after: "/images/gallery/bathroom-after.jpg", alt: "Bathroom cleaning comparison" },
+  { title: "Kitchen", before: "/images/gallery/kitchen-before.jpg", after: "/images/gallery/kitchen-after.jpg", alt: "Kitchen cleaning comparison" },
+  { title: "Sofa", before: "/images/gallery/sofa-before.jpg", after: "/images/gallery/sofa-after.jpg", alt: "Sofa cleaning comparison" },
+  { title: "Window", before: "/images/gallery/window-before.jpg", after: "/images/gallery/window-after.jpg", alt: "Window cleaning comparison" },
 ];
 
 export default gallery;

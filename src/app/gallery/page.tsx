@@ -4,7 +4,12 @@ import { BeforeAfterCard } from "@/components/BeforeAfterCard";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import gallery, { comparisons } from "../../../data/gallery";
 
-export const metadata: Metadata = { title: "Cleaning Service Gallery", description: "Explore Urban Shine Cleaning’s local service gallery, from bathrooms and kitchens to offices and outdoor spaces." };
+export const metadata: Metadata = {
+  title: "Cleaning Service Gallery | Urban Shine Cleaning Patna",
+  description: "Explore Urban Shine Cleaning's local service gallery, from bathrooms and kitchens to offices and outdoor spaces in Patna.",
+  keywords: ["Cleaning Service Gallery", "Before and After Cleaning", "Urban Shine Cleaning Photos"],
+  alternates: { canonical: "/gallery" }
+};
 
 export default function GalleryPage() {
   return <>

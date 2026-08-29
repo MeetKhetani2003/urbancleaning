@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "About Urban Shine Cleaning", description: "Learn about Urban Shine Cleaning, a Patna-based professional cleaning service for homes, offices and specialised spaces." };
+export const metadata: Metadata = {
+  title: "About Urban Shine Cleaning | Our Story in Patna",
+  description: "Learn about Urban Shine Cleaning, a Patna-based professional cleaning service for homes, offices and specialised spaces. We make your space feel fresh again.",
+  keywords: ["About Urban Shine Cleaning", "Cleaning Company Patna", "Local Cleaners Bihar", "Professional Cleaners in Patna"],
+  alternates: { canonical: "/about" }
+};
 
 export default function AboutPage() {
   return <>

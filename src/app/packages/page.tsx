@@ -4,7 +4,12 @@ import Link from "next/link";
 import { PackageCard } from "@/components/PackageCard";
 import packages from "../../../data/packages";
 
-export const metadata: Metadata = { title: "2 BHK, 3 BHK & 4 BHK Cleaning Packages", description: "Explore editable home cleaning package enquiries for 2 BHK, 3 BHK and 4 BHK homes in Patna." };
+export const metadata: Metadata = {
+  title: "2 BHK, 3 BHK & 4 BHK Cleaning Packages | Patna",
+  description: "Explore editable home cleaning package enquiries for 2 BHK, 3 BHK and 4 BHK homes in Patna. Professional whole-home cleaning services.",
+  keywords: ["2 BHK Cleaning Patna", "3 BHK Cleaning Service", "4 BHK Deep Cleaning Patna", "Home Cleaning Packages"],
+  alternates: { canonical: "/packages" }
+};
 
 export default function PackagesPage() {
   return <>

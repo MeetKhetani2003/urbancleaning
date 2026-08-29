@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "How It Works", description: "See how to request home, office and specialised cleaning with Urban Shine Cleaning in Patna." };
+export const metadata: Metadata = {
+  title: "How It Works | Urban Shine Cleaning Process",
+  description: "See how simple it is to request home, office and specialised cleaning with Urban Shine Cleaning in Patna. From booking to a spotless home in 4 steps.",
+  keywords: ["How Urban Shine Works", "Book Cleaning Online Patna", "Cleaning Process Bihar"],
+  alternates: { canonical: "/how-it-works" }
+};
 
 const steps = [
   ["Choose Your Service", "Browse the cleaning service you need, from one focused area to a full home or professional workspace.", "/images/how-it-works/choose-service.jpg"],

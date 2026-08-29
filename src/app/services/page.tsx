@@ -4,7 +4,12 @@ import Link from "next/link";
 import { ServiceCard } from "@/components/ServiceCard";
 import services from "../../../data/services";
 
-export const metadata: Metadata = { title: "Cleaning Services in Patna", description: "Explore professional home, office, furniture and specialised cleaning services in Patna from Urban Shine Cleaning." };
+export const metadata: Metadata = {
+  title: "Cleaning Services in Patna | Home & Office Cleaners",
+  description: "Explore professional home, office, furniture and specialised cleaning services in Patna from Urban Shine Cleaning. Reliable and affordable.",
+  keywords: ["Cleaning Services Patna", "Home Cleaners Bihar", "Office Cleaning Services Patna", "Professional Cleaning"],
+  alternates: { canonical: "/services" }
+};
 
 export default function ServicesPage() {
   const groups = [

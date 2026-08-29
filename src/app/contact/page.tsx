@@ -3,7 +3,12 @@ import Link from "next/link";
 import { BookingForm } from "@/components/BookingForm";
 import contact from "../../../data/contact";
 
-export const metadata: Metadata = { title: "Contact Urban Shine Cleaning", description: "Contact Urban Shine Cleaning for home, office and specialised cleaning enquiries in Patna, Bihar." };
+export const metadata: Metadata = {
+  title: "Contact Urban Shine Cleaning | Book in Patna",
+  description: "Contact Urban Shine Cleaning for home, office and specialised cleaning enquiries in Patna, Bihar. Get a free quote today.",
+  keywords: ["Contact Urban Shine Cleaning", "Book Cleaning Service Patna", "Cleaning Enquiry Bihar"],
+  alternates: { canonical: "/contact" }
+};
 
 export default function ContactPage() {
   const hasDirectDetails = contact.phone || contact.email || contact.whatsapp;
