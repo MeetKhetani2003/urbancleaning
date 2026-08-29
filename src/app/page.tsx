@@ -4,9 +4,10 @@ import Link from "next/link";
 import { BeforeAfterCard } from "@/components/BeforeAfterCard";
 import { PackageCard } from "@/components/PackageCard";
 import { ServiceCard } from "@/components/ServiceCard";
-import packages from "../../data/packages";
-import services from "../../data/services";
-import { comparisons } from "../../data/gallery";
+import { connectDB } from "@/lib/db";
+import { Service } from "@/models/Service";
+import { Package } from "@/models/Package";
+import { BeforeAfter } from "@/models/Gallery";
 
 export const metadata: Metadata = {
   title: "Professional Cleaning Service in Patna",
@@ -21,7 +22,32 @@ const spaceItems = [
   ["Outdoor", "Balconies, windows and garden areas.", "/services/balcony-cleaning"],
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  await connectDB();
+  
+  const rawServices = await Service.find({}).lean();
+  const services = rawServices.map(s => ({
+    ...s,
+    _id: s._id.toString(),
+    image: `/api/images/${s.image}`,
+    whatWeCleanImages: (s.whatWeCleanImages || []).map((id: string) => `/api/images/${id}`)
+  }));
+
+  const rawPackages = await Package.find({}).lean();
+  const packages = rawPackages.map(p => ({
+    ...p,
+    _id: p._id.toString(),
+    image: `/api/images/${p.image}`
+  }));
+
+  const rawComparisons = await BeforeAfter.find({}).lean();
+  const comparisons = rawComparisons.map(c => ({
+    ...c,
+    _id: c._id.toString(),
+    before: `/api/images/${c.before}`,
+    after: `/api/images/${c.after}`
+  }));
+
   const featured = services.slice(0, 8);
   const specialised = services.filter((service) => service.category === "Specialised Cleaning" || service.slug === "window-cleaning" || service.slug === "balcony-cleaning" || service.slug === "garden-cleaning");
   return (

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PackageCard } from "@/components/PackageCard";
-import packages from "../../../data/packages";
+import { connectDB } from "@/lib/db";
+import { Package } from "@/models/Package";
 
 export const metadata: Metadata = {
   title: "2 BHK, 3 BHK & 4 BHK Cleaning Packages | Patna",
@@ -11,7 +12,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/packages" }
 };
 
-export default function PackagesPage() {
+export default async function PackagesPage() {
+  await connectDB();
+  
+  const rawPackages = await Package.find({}).lean();
+  const packages = rawPackages.map(p => ({
+    ...p,
+    _id: p._id.toString(),
+    image: `/api/images/${p.image}`
+  }));
   return <>
     <section className="page-hero page-hero--packages"><Image src="/images/packages/3bhk-cleaning.jpg" alt="Freshly cleaned modern apartment interior" fill priority sizes="100vw" /><div className="page-hero-wash" /><div className="shell page-hero-content"><p className="eyebrow eyebrow--light">Home cleaning packages</p><h1>Your Home, <em>Thoughtfully<br />Cared For.</em></h1><p>Choose a home-size starting point, then tell us about the rooms and cleaning attention your space needs.</p><Link className="button button--light" href="/book-service">Request a package <span>↗</span></Link></div></section>
     <section className="section shell packages-intro"><div className="section-heading center-heading"><p className="eyebrow">Find your fit</p><h2>Choose Your Home&apos;s<br /><em>Starting Point.</em></h2><p>Our BHK pages are designed to make a home-cleaning enquiry clearer. Exact requirements can be shared before service.</p></div><div className="package-grid">{packages.map((item, index) => <PackageCard key={item.slug} item={item} featured={index === 1} />)}</div></section>

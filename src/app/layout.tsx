@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <a href="/contact#enquiry"><span className="bottom-cta-icon">⌕ </span>Call</a>
           <a href="/book-service" className="bottom-cta-book">Book cleaning <span aria-hidden>↗</span></a>
         </div>
+        <WhatsAppButton />
       </body>
     </html>
   );

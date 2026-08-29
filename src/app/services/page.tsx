@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ServiceCard } from "@/components/ServiceCard";
-import services from "../../../data/services";
+import { connectDB } from "@/lib/db";
+import { Service } from "@/models/Service";
 
 export const metadata: Metadata = {
   title: "Cleaning Services in Patna | Home & Office Cleaners",
@@ -11,7 +12,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" }
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  await connectDB();
+  const dbServices = await Service.find({}).lean();
+  const services = dbServices.map(s => ({
+    ...s,
+    _id: s._id.toString(),
+    image: `/api/images/${s.image}`,
+    whatWeCleanImages: (s.whatWeCleanImages || []).map((id: string) => `/api/images/${id}`)
+  }));
   const groups = [
     ["Home & furniture care", "Everyday spaces, from one important room to the whole home.", services.filter((s) => ["Home Cleaning", "Furniture Care"].includes(s.category))],
     ["Professional spaces", "A clear, polished start for workspaces and meeting rooms.", services.filter((s) => s.category === "Commercial Cleaning")],

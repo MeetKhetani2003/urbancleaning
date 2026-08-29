@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookingForm } from "@/components/BookingForm";
-import contact from "../../../data/contact";
+import { connectDB } from "@/lib/db";
+import { Contact } from "@/models/Contact";
 
 export const metadata: Metadata = {
   title: "Contact Urban Shine Cleaning | Book in Patna",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" }
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  await connectDB();
+  const contact = await Contact.findOne({}).lean() || { phone: '', email: '', whatsapp: '', location: 'Patna, Bihar' };
   const hasDirectDetails = contact.phone || contact.email || contact.whatsapp;
   return <>
     <section className="page-top page-top--contact"><div className="shell"><p className="eyebrow">Get in touch</p><h1>Let&apos;s Make Your<br /><em>Space Shine.</em></h1><p>Tell us about your home, office or focused cleaning requirement. Urban Shine Cleaning serves Patna, Bihar.</p></div></section>

@@ -282,3 +282,6 @@ em { color: var(--green); font-family: Georgia, "Times New Roman", serif; font-w
 }
 
 @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+.whatsapp-float-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; padding: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 1000; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.whatsapp-float-btn:hover { transform: scale(1.1); box-shadow: 0 6px 14px rgba(0,0,0,0.2); }
+@media (max-width: 768px) { .whatsapp-float-btn { bottom: 80px; } }

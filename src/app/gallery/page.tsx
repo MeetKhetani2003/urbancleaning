@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BeforeAfterCard } from "@/components/BeforeAfterCard";
 import { GalleryGrid } from "@/components/GalleryGrid";
-import gallery, { comparisons } from "../../../data/gallery";
+import { connectDB } from "@/lib/db";
+import { Gallery, BeforeAfter } from "@/models/Gallery";
 
 export const metadata: Metadata = {
   title: "Cleaning Service Gallery | Urban Shine Cleaning Patna",
@@ -11,7 +12,27 @@ export const metadata: Metadata = {
   alternates: { canonical: "/gallery" }
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  await connectDB();
+  
+  const rawGallery = await Gallery.find({}).lean();
+  const gallery = rawGallery.map(g => ({
+    ...g,
+    _id: g._id.toString(),
+    image: `/api/images/${g.image}`,
+    src: `/api/images/${g.image}`, // map to src for GalleryGrid
+    alt: g.title,
+    orientation: g.span?.includes('row-span-2') ? 'portrait' : 'landscape'
+  }));
+
+  const rawComparisons = await BeforeAfter.find({}).lean();
+  const comparisons = rawComparisons.map(c => ({
+    ...c,
+    _id: c._id.toString(),
+    before: `/api/images/${c.before}`,
+    after: `/api/images/${c.after}`
+  }));
+
   return <>
     <section className="page-top page-top--gallery"><div className="shell"><p className="eyebrow">Urban Shine moments</p><h1>Fresh Spaces,<br /><em>In Focus.</em></h1><p>Explore a visual look at the thoughtful cleaning attention given to homes, workspaces and the details in between.</p></div></section>
     <section className="section shell gallery-before"><div className="section-heading split-heading"><div><p className="eyebrow">A closer look</p><h2>See The <em>Difference.</em></h2></div><p>Move each slider to explore an illustrative before-and-after view. These local gallery image slots are ready for future client project photography.</p></div><div className="comparison-grid comparison-grid--four">{comparisons.map((item) => <BeforeAfterCard item={item} key={item.title} />)}</div></section>
