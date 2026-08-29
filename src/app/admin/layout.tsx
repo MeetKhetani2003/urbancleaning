@@ -29,6 +29,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <Link href="/admin/packages" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Packages
           </Link>
+          <Link href="/admin/about" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
+            About Page
+          </Link>
           <Link href="/admin/gallery" className="block px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-[#0c5f50]">
             Gallery
           </Link>
