@@ -6,7 +6,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://urbanshinecleaning.in"),
+  metadataBase: new URL("https://urbanshinecleaningservice.in"),
   title: { default: "Urban Shine Cleaning | Professional Cleaning Service in Patna", template: "%s | Urban Shine Cleaning" },
   description: "Urban Shine Cleaning offers professional home, office and specialised cleaning service enquiries in Patna, Bihar.",
   keywords: ["Urban Shine Cleaning", "Cleaning Service in Patna", "Home Cleaning Service Patna", "Bathroom Cleaning Patna", "Office Cleaning Patna"],
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Urban Shine Cleaning",
-    "image": "https://urbanshinecleaning.in/images/hero/cleaning-team.jpg",
+    "image": "https://urbanshinecleaningservice.in/images/hero/cleaning-team.jpg",
     "description": "Urban Shine Cleaning offers professional home, office and specialised cleaning service enquiries in Patna, Bihar.",
     "address": {
       "@type": "PostalAddress",
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       "latitude": 25.5941,
       "longitude": 85.1376
     },
-    "url": "https://urbanshinecleaning.in",
+    "url": "https://urbanshinecleaningservice.in",
     "telephone": "+91-0000000000",
     "priceRange": "?"
   };
