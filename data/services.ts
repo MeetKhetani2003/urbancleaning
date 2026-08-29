@@ -141,7 +141,7 @@ const services: Service[] = [
     slug: "balcony-cleaning",
     title: "Balcony Cleaning",
     category: "Outdoor Cleaning",
-    image: "/images/services/balcony-cleaning-v2.jpg",
+    image: "/images/services/balcony-cleaning-v3.jpg",
     description: "Refresh balcony floors, rails and everyday outdoor living areas.",
     heroCopy: "Bring your balcony back into the rhythm of your home with cleaning attention for its accessible surfaces and corners.",
     whatWeClean: ["Balcony floor", "Railings", "Glass panels", "Corners", "Planter exteriors", "Accessible ledges"],
