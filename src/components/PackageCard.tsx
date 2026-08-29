@@ -11,7 +11,10 @@ export function PackageCard({ item, featured = false }: { item: Package; feature
       </div>
       <div className="package-content">
         <span className="eyebrow eyebrow--small">Home package</span>
-        <h3>{item.title}</h3>
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="mb-0">{item.title}</h3>
+          {item.price && <span className="text-[var(--green)] font-bold text-sm whitespace-nowrap ml-3 mt-1">{item.price}</span>}
+        </div>
         <p>{item.description}</p>
         <div className="package-rule" />
         <p className="package-note">{item.rooms}</p>

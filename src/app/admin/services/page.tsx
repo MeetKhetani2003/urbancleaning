@@ -8,6 +8,7 @@ type Service = {
   title: string;
   category: string;
   slug: string;
+  price?: string;
 };
 
 export default function AdminServicesPage() {
@@ -49,6 +50,7 @@ export default function AdminServicesPage() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Slug</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
               </tr>
             </thead>
@@ -58,6 +60,7 @@ export default function AdminServicesPage() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{service.title}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{service.category}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{service.slug}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{service.price || '-'}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link href={`/admin/services/${service._id}`} className="text-[#0c5f50] hover:text-[#09473c] mr-4">
                       Edit

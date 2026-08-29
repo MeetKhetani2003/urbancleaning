@@ -41,6 +41,8 @@ export default function AdminPackagesPage() {
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rooms</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Slug</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
               </tr>
             </thead>
@@ -49,6 +51,8 @@ export default function AdminPackagesPage() {
                 <tr key={pkg._id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{pkg.title}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{pkg.rooms}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{pkg.slug}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{pkg.price || '-'}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link href={`/admin/packages/${pkg._id}`} className="text-[#0c5f50] hover:text-[#09473c] mr-4">Edit</Link>
                     <button onClick={() => handleDelete(pkg._id)} className="text-red-600 hover:text-red-900">Delete</button>

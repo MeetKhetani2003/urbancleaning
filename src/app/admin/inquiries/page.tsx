@@ -36,6 +36,7 @@ export default function AdminInquiriesPage() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contact</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Address & Info</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Service</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
               </tr>
@@ -43,7 +44,7 @@ export default function AdminInquiriesPage() {
             <tbody className="bg-white divide-y divide-gray-200">
               {inquiries.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-4 text-center text-gray-500">No inquiries found.</td>
+                  <td colSpan={6} className="px-6 py-4 text-center text-gray-500">No inquiries found.</td>
                 </tr>
               ) : inquiries.map((inquiry) => (
                 <tr key={inquiry._id}>
@@ -54,6 +55,10 @@ export default function AdminInquiriesPage() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {inquiry.phone}<br/>
                     {inquiry.email}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500 max-w-xs break-words">
+                    <strong>Address:</strong> {inquiry.address || 'N/A'}<br/>
+                    {inquiry.additionalInfo && <span><strong>Info:</strong> {inquiry.additionalInfo}</span>}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {inquiry.service} <br/>

@@ -8,6 +8,7 @@ export interface IInquiry extends Document {
   date: string;
   propertyInfo: string;
   additionalInfo: string;
+  address: string;
   createdAt: Date;
 }
 
@@ -19,6 +20,7 @@ const InquirySchema = new Schema<IInquiry>({
   date: { type: String, required: true },
   propertyInfo: { type: String },
   additionalInfo: { type: String },
+  address: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 

@@ -9,7 +9,7 @@ export default function PackageFormPage({ params }: { params: Promise<{ id: stri
   const router = useRouter();
   
   const [formData, setFormData] = useState({
-    slug: '', title: '', description: '', rooms: '', image: '', included: [] as string[]
+    slug: '', title: '', description: '', rooms: '', image: '', included: [] as string[], price: ''
   });
   
   const [loading, setLoading] = useState(!isNew);
@@ -87,6 +87,10 @@ export default function PackageFormPage({ params }: { params: Promise<{ id: stri
           <div>
             <label className="block text-sm font-medium text-gray-700">Rooms</label>
             <input type="text" required value={formData.rooms} onChange={e => setFormData({...formData, rooms: e.target.value})} className="mt-1 w-full border border-gray-300 p-2 rounded" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Price</label>
+            <input type="text" value={formData.price || ''} onChange={e => setFormData({...formData, price: e.target.value})} placeholder="e.g. ₹4,999" className="mt-1 w-full border border-gray-300 p-2 rounded" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Image</label>

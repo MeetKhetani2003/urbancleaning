@@ -14,6 +14,7 @@ type ServiceData = {
   whatWeClean: string[];
   whatWeCleanImages: string[];
   benefit: string;
+  price?: string;
 };
 
 export default function ServiceFormPage({ params }: { params: Promise<{ id: string }> }) {
@@ -23,7 +24,7 @@ export default function ServiceFormPage({ params }: { params: Promise<{ id: stri
   
   const [formData, setFormData] = useState<ServiceData>({
     slug: '', title: '', category: '', image: '', description: '', 
-    heroCopy: '', whatWeClean: [], whatWeCleanImages: [], benefit: ''
+    heroCopy: '', whatWeClean: [], whatWeCleanImages: [], benefit: '', price: ''
   });
   
   const [loading, setLoading] = useState(!isNew);
@@ -103,6 +104,10 @@ export default function ServiceFormPage({ params }: { params: Promise<{ id: stri
           <div>
             <label className="block text-sm font-medium text-gray-700">Category</label>
             <input type="text" required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="mt-1 w-full border border-gray-300 p-2 rounded" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Price</label>
+            <input type="text" value={formData.price || ''} onChange={e => setFormData({...formData, price: e.target.value})} placeholder="e.g. ₹1,999 or Starting at ₹1,999" className="mt-1 w-full border border-gray-300 p-2 rounded" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Main Image</label>

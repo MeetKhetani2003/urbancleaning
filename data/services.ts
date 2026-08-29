@@ -8,6 +8,7 @@ export type Service = {
   whatWeClean: string[];
   whatWeCleanImages?: string[];
   benefit: string;
+  price?: string;
 };
 
 const services: Service[] = [

@@ -5,8 +5,8 @@ export interface IPackage extends Document {
   title: string;
   description: string;
   rooms: string;
-  image: string;
   included: string[];
+  price?: string;
 }
 
 const PackageSchema = new Schema<IPackage>({
@@ -16,6 +16,7 @@ const PackageSchema = new Schema<IPackage>({
   rooms: { type: String, required: true },
   image: { type: String, required: true },
   included: [{ type: String }],
+  price: { type: String, default: '' },
 });
 
 export const Package = mongoose.models.Package || mongoose.model<IPackage>('Package', PackageSchema);

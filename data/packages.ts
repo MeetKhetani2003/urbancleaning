@@ -5,6 +5,7 @@ export type Package = {
   description: string;
   rooms: string;
   focus: string[];
+  price?: string;
 };
 
 const packages: Package[] = [

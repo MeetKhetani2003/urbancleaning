@@ -11,7 +11,10 @@ export function ServiceCard({ service, priority = false }: { service: Service; p
       </Link>
       <div className="service-card-body">
         <span className="eyebrow eyebrow--small">{service.category}</span>
-        <h3><Link href={`/services/${service.slug}`}>{service.title}</Link></h3>
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="mb-0"><Link href={`/services/${service.slug}`}>{service.title}</Link></h3>
+          {service.price && <span className="text-[var(--green)] font-bold text-sm whitespace-nowrap ml-3 mt-1">{service.price}</span>}
+        </div>
         <p>{service.description}</p>
         <Link href={`/services/${service.slug}`} className="text-link">View service <span aria-hidden>→</span></Link>
       </div>

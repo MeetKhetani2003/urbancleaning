@@ -10,6 +10,7 @@ export interface IService extends Document {
   whatWeClean: string[];
   whatWeCleanImages: string[];
   benefit: string;
+  price?: string;
 }
 
 const ServiceSchema = new Schema<IService>({
@@ -22,6 +23,7 @@ const ServiceSchema = new Schema<IService>({
   whatWeClean: [{ type: String }],
   whatWeCleanImages: [{ type: String }],
   benefit: { type: String, required: true },
+  price: { type: String, default: '' },
 });
 
 export const Service = mongoose.models.Service || mongoose.model<IService>('Service', ServiceSchema);
