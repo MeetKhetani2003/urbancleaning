@@ -5,6 +5,8 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { connectDB } from "@/lib/db";
 import { Service } from "@/models/Service";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Cleaning Services in Patna | Home & Office Cleaners",
   description: "Explore professional home, office, furniture and specialised cleaning services in Patna from Urban Shine Cleaning. Reliable and affordable.",

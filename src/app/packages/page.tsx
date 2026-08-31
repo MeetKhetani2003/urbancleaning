@@ -5,6 +5,8 @@ import { PackageCard } from "@/components/PackageCard";
 import { connectDB } from "@/lib/db";
 import { Package } from "@/models/Package";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "2 BHK, 3 BHK & 4 BHK Cleaning Packages | Patna",
   description: "Explore editable home cleaning package enquiries for 2 BHK, 3 BHK and 4 BHK homes in Patna. Professional whole-home cleaning services.",

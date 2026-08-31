@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   keywords: ["Urban Shine Cleaning", "Cleaning Service in Patna", "Home Cleaning Service Patna", "Bathroom Cleaning Patna", "Office Cleaning Patna"],
   openGraph: { title: "Urban Shine Cleaning | Professional Cleaning Service in Patna", description: "Fresh, professional cleaning solutions for homes, offices and every space in between.", type: "website", locale: "en_IN" },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/images/logo/urban-shine-logo.png",
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#0c5f50", colorScheme: "light" };

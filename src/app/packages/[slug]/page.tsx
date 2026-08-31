@@ -7,11 +7,7 @@ import { Package } from "@/models/Package";
 import { Contact } from "@/models/Contact";
 import { ServiceInquireButton } from "@/components/ServiceInquireButton";
 
-export async function generateStaticParams() { 
-  await connectDB();
-  const pkgs = await Package.find({}, 'slug').lean();
-  return pkgs.map((item) => ({ slug: item.slug })); 
-}
+export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; 
   await connectDB();

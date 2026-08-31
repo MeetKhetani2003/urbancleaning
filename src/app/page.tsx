@@ -9,6 +9,8 @@ import { Service } from "@/models/Service";
 import { Package } from "@/models/Package";
 import { BeforeAfter } from "@/models/Gallery";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Professional Cleaning Service in Patna",
   description: "Book home, office and specialised cleaning services with Urban Shine Cleaning in Patna, Bihar.",
